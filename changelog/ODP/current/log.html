@@ -1,0 +1,1359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="ODP, current, changes, changelog" />
+    <meta name="description" content="Log of changes in the package" />
+    <link rel="stylesheet" type="text/css" href="../../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/changelog.css" />
+    
+    
+    <title>
+        ODP current: changelog
+    </title>
+    
+    </head>
+
+<body>
+<table cellpadding='0' cellspacing='0'><tr><td align='center'><h1 class='tool'><a title='ABI tracker for ODP' href='../../../timeline/ODP/index.html' class='tool'>ABI<br/>Tracker</a></h1></td><td width='30px;'></td><td><h1>(ODP)</h1></td></tr></table><hr/>
+<br/>
+<br/>
+<h1>Changelog from Git</h1><br/><br/>
+<div class='changelog'>
+<pre class='wrap'>commit 49c671e80fd2c88b6f36337ebd1cd4748eb8bae1
+Author: Ilias Apalodimas &lt;ilias.apalodimas@linaro.org&gt;
+Date:   2018-02-16 12:12:26 +0200
+
+    odp: pktio: add pcapng capture capabilities
+    
+    Introduce new fast pcap capture interface to odp.
+    How to test:
+    sudo mkdir /var/run/odp/
+    start the ODP application
+    sudo dd if=/var/run/odp/"pid"-ethX-flow-"queue" of=~/t.pcap
+    
+    Signed-off-by: Ilias Apalodimas &lt;ilias.apalodimas@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 11207ff1e211658bfb44c635423ae818a0654239
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-05-07 12:41:54 +0300
+
+    linux-gen: use inlined event type function
+    
+    Implementation uses internally inlined version of event
+    functions.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 3abbe8b729310d29b9a2c84a7d7a11771513908d
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-05-04 15:20:33 +0300
+
+    linux-gen: event: inline event_type function
+    
+    Inline odp_event_type() as an example how current inline
+    mechanism can be simplified. Only one file is needed for inline
+    function definitions (xxx_inlines.h) and _ODP_NO_INLINE macro
+    selects when non-inlined implementation is needed (only by
+    xxx_api.c files). Implementation uses internally always inlined
+    functions. Inlined function name is changed with macro from
+    odp_foo() to __odp_foo().
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit f49289a7f621ffe5c981caa8531623d9e0a4abd9
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-05-04 14:58:47 +0300
+
+    linux-gen: buffer: remove buffer_inlines header file
+    
+    Moved odp_buffer_inlines.h content to odp_buffer_internal.h
+    and removed the file. Other xxx_inlines.h headers do not
+    contain internal functions but only code for API function
+    inlining.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit cc6d68e1dcf0f4f9b8b7442a4739288892fcb345
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-05-07 11:10:32 +0300
+
+    test: ipsec: fix link order
+    
+    In LDADD a library using another library, must become before that
+    library. An application library uses ODP, so it must become before
+    ODP library.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 332877d51e773a584d272a03f08446d18cbe1634
+Author: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+Date:   2018-05-08 18:01:15 +0300
+
+    configure.ac: update version to v1.19.0.1
+    
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+
+commit bed462d28fa081a0d66dd29a8034f188256c7d04
+Author: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+Date:   2018-05-07 15:29:04 -0500
+
+    changelog: updates for odp v1.19.0.1
+    
+    Add updates for ODP v1.19.0.1 (Tiger Moth Service Update 1)
+    
+    Signed-off-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 2b27f75b587cf23d2687dd37897cbb26ed915890
+Author: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+Date:   2018-05-04 14:04:21 +0200
+
+    linux-gen: fix compilation warnings
+    
+    gcc 8 complains when strncpy may truncate the destination string,
+    possibly not copying the null terminating character
+    (-Werror=stringop-truncation).
+    By using memcpy we silent gcc8, but we also make sure that the
+    strings are null-terminated.
+    
+    Signed-off-by: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 79781031e28dee010425f575d1bf5de5b18af0d6
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-05-02 11:58:33 +0300
+
+    example: timer_accuracy: simple timer accuracy measurement app
+    
+    Added simple application to measure timer accuracy. Uses time
+    API to measure accuracy of received timeouts from timer.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 7d91fbd6c1a40e378b06f9be6dd3ef260c66dba9
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2018-05-04 10:39:48 +0300
+
+    linux-gen: packet: rearrange odp_packet_hdr_t members
+    
+    Save 64 bytes by rearranging odp_packet_hdr_t members.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit d189d704a29f490583057ccb5c762432a4e4b7a7
+Author: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+Date:   2018-05-04 12:33:26 +0300
+
+    linux-gen: pktio: ipc free ring memory on error
+    
+    ipc pktio can fail on open if second process is not
+    yet ready to connect. But on this error free of ring
+    memory is missing which leads to taking all available shm
+    descriptors.
+    https://bugs.linaro.org/show_bug.cgi?id=3788
+    
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+
+commit 122b74c0074329f1758b2ed5d241e0e9a790087b
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-04-23 15:59:38 +0300
+
+    build: odp_dpdk: add dependencies for crypto PMDs
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit bd37df82b49faefef078558cdb2a54477bec6c5a
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-04-27 13:33:58 +0300
+
+    test: sched_pktio: add inactivity timer
+    
+    Add a timer per packet input queue to test timer performance
+    with packet IO. The timer is reset every time packets are received
+    from a queue, or when timer expires. Timer testing is enabled by
+    setting the timeout period in usec with -t option.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit dea03d0a24117764ea9b8763e640a4836031e82b
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-04-26 17:13:40 +0300
+
+    test: sched_pktio: parse options before odp global init
+    
+    Options can be used to set parameters for odp_init_global().
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 5c745f55a160b0a72d8e493604917a0d63dd71a5
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-04-26 14:18:57 +0300
+
+    test: sched_pktio: ensure packet order per flow
+    
+    Select pktout queue based on input queue, instead of worker id.
+    Packet order is maintained from input to output as each flow
+    is routed always through the same queues.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 15a30694560ba62160fa3a8ffddeb51b800e351a
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-04-26 14:50:39 +0300
+
+    test: sched_pktio: add pktio queue count option
+    
+    Added option for selecting number of input / output queues
+    per pktio interface. For simplicity, the same number of queues
+    is configured for all interfaces and both (input / output)
+    directions.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 27a84cdfc0dfb82e3b86067e473658c091377892
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-04-27 12:50:52 +0300
+
+    linux-gen: timer: set and check highest resolution
+    
+    When using inline_timers, highest resolution was left to 0 ns
+    and was checked to be non-zero. In practice, few nanosecond
+    resolution is not needed or practical. Limit highest supported
+    resolution to 500 ns.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 3600304c30c4a345538f6c06ca50183b14cd12b1
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-04-28 16:06:42 +0300
+
+    doc: allow user to provide exta asciidoctor flags
+    
+    Allow user to provide extra asciidoctor flags. E.g. this allows one to
+    override icons and/or fonts placement.
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 4ec4a756c7607e3a78878e6699a82ccf6d0a1461
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-04-28 10:57:32 +0300
+
+    travis: do not run gcov before executing codecov script
+    
+    There is no need to manually run gcov from Travis script, codecov.io
+    will do that for us.
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 0f700e1a4b8e66c269081eba64eb5be8c37de868
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-04-24 17:15:38 +0300
+
+    validation: timer: add timer pool create-destroy test
+    
+    Added a test case that creates, uses and destroyes multiple
+    timer pools.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit f0d0fd91978a8127ed270b03853ac0e04492a333
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-04-25 12:57:33 +0300
+
+    linux-gen: timer: reduce number of timer pools
+    
+    Typical application needs only couple of timer pools. Reduce
+    number of timer pools to reduce global data structure size.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 2ee48570ed824d5caff4f8cb121b7c293a481820
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-04-25 12:37:06 +0300
+
+    linux-gen: timer: fix timer pool index allocation
+    
+    Timer pool index was allocated using atomic counters, so that
+    a combination of timer_pool_create and _destroy calls resulted
+    the same index to be allocated for multiple timers.
+    
+    Use a global data structure protected with a lock to maintain
+    pool status.
+    Fixes: https://bugs.linaro.org/show_bug.cgi?id=3772
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 82499a9a4c80670de20825992478ccd4d764e28c
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-04-22 23:49:15 +0300
+
+    linux-gen: dpdk: fix linking to libnuma
+    
+    Linking to dpdk/numa can fail with the following message:
+    /usr/bin/x86_64-linux-gnu-ld: lib/.libs/libodp-linux.a(dpdk.o):
+     undefined reference to symbol 'numa_num_configured_nodes@@libnuma_1.2'
+    //usr/lib/x86_64-linux-gnu/libnuma.so.1:
+     error adding symbols: DSO missing from command line
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit c164ad605422f90f3566e4c4ebed0ea3c2adb3a8
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-04-25 16:25:20 +0300
+
+    test: crypto perf: add missing breaks to switch case
+    
+    Breaks are needed for switch-cases. Missing breaks were
+    breaking build for GCC 7.2.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 53dca8426775ed5bf40f2c2708915f02b2dccc74
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-04-24 16:23:53 +0300
+
+    validation: timer: loosen period accuracy requirement
+    
+    Test passes if measured:
+     * timeout period is within +-20% (+-4x resolution)
+       of the requested period, and
+     * test period is within +-10% (+- 1 timeout period)
+       of the requested 10 periods.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit f69f033da3b6900acdd170668cae07ac6cd959f3
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-04-24 17:39:17 +0300
+
+    validation: crypto: add missing ODP_CIPHER_ALG_AES_CTR name
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 8d957f16105fa44d483478b2c05bae735680c007
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-04-24 11:56:15 +0300
+
+    travis: bump DPDK version to 17.11.2 - latest LTS release
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 5028177e4e795305b514d7164ff882dcf1d3622b
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-04-24 11:53:05 +0300
+
+    travis: fetch explicitly specified DPDK version
+    
+    Use tag to fetch DPDK, rather than fetching top of corresponding branch.
+    This allows us to specify stable version and stop unnecessary playing
+    with the cache.
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 24262a9aae62290dfd1a041d0bd5c6943270251d
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-04-24 15:53:59 +0300
+
+    test: mmap_vlan_ins: wait for background process
+    
+    Each 'make check' run was still leaving a mmap_vlan_ins
+    process behind. Wait until both processes (also the background
+    process) has finished before tearing down the interfaces.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 7e355890905a9195ff1027377991b4134e285a03
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-04-23 23:10:03 +0300
+
+    linux-gen: ipsec: parse IPv6 next header in tunnel case
+    
+    IPsec parsing code will fail to update next header field in internal
+    state in case of outbound tunnel processing of IPv6 packets.
+    Fixes: https://bugs.linaro.org/show_bug.cgi?id=3764
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 6947621e1b3a3c73c3ee351325f505e5e191474f
+Author: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+Date:   2018-04-23 13:48:22 +0200
+
+    linux-gen: fdserver: remove unnecessary locking
+    
+    The locks in fdserver's operations don't serve any purpose, there is no
+    need to acquire a lock when registering a file descriptor to the server,
+    specially because the only place where the registering function is used
+    is already protected by another lock, and the same goes for
+    deregistering. Also, the fdserver handles requests sequentially.
+    
+    On the other hand, removing the lock from the lookup function may return
+    a fd that is being deregistered, but this is not protecting us from
+    misusing it because the operation to be unregistered may be queued right
+    after the lookup request, at which point the fd is already invalid
+    anyway.
+    
+    Signed-off-by: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 29cb860583cb906bc16eddf9a4c98d6bb37333e5
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-04-23 13:52:31 +0300
+
+    test: crypto perf: check algorithm capabilities
+    
+    Test only those algorithms that implementation supports.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit acc05760d5060d1782aa597e44c72ccb9a71b63b
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-04-03 15:48:12 +0300
+
+    validation: crypto: zero return code of odp_crypto_op/odp_crypto_op_enq
+    
+    crypto_main test will accept odp_crypto_op/odp_crypto_op_enq
+    returning 0 meaning 0 packets were processed. Instead it
+    should mark test as failedin this case.
+    Fixes: https://bugs.linaro.org/show_bug.cgi?id=3763
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit c440dfceff97526d2763383afd8da064faef3d0d
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-04-22 10:18:17 +0300
+
+    linux-generic: random: split from crypto module
+    
+    While random and crypto might share some implementation details, in case
+    of linux-generic and linux-DPDK it might be easier to split them to two
+    different files.
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 93591a6134fbc5655c0cf6a25e0b4e0668357971
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-04-20 14:25:30 +0300
+
+    validation: timer: honor min timeout param value
+    
+    Timeout requests should be between min_tmo and max_tmo
+    timer pool parameters, if too early/too late return codes
+    are reported as test failures.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit fec701841dbe2e963cf3adc7c74c98b41e059b9d
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-04-19 17:54:36 +0300
+
+    validation: timer: fix timer_all test sync issue
+    
+    When timer is reset, odp_timer_set_rel() outputs the previous
+    event handle (not ODP_EVENT_INVALID as in case of set).
+    Test case 'timer_all' maintain test status in the event handle
+    variable. Set the variable always to EVENT_INVALID so that both
+    set and reset cases work the same way.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 0e24607e3075a573ebe4ac408703c76daac7236c
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-04-19 14:40:21 +0300
+
+    validation: timer: add plain and sched queue tests
+    
+    Added simple timeout delivery tests for plain and scheduled
+    queues. Current "timer_all" test is complex and tests only
+    plain queues.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 5d4be5077adeec54d1956c86dcb87b186c39a7cb
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-04-19 13:03:29 +0300
+
+    validation: timer: don't assume low timer tick frequency
+    
+    Timer tick can be the same as CPU frequency. So, test cannot
+    loop until two current_tick calls return the same tick value.
+    Similarly, test cannot assume that expiration tick of a relative
+    timeout call can be exactly calculated from a current_tick value.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 3aa3f4352083d159260cebc23b87607e73aa6f2b
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-04-19 11:08:14 +0300
+
+    validation: timer: tick conversion may lose precision
+    
+    Tick &lt;-&gt; nsec conversion may include rounding and thus loss
+    of precision. For example, when tick frequency is higher than
+    1GHz conversion to nsec lose precision by definition.
+    
+    Modified test to convert nsec -&gt; tick -&gt; nsec and allow
+    resolution level diffrence between nsec values.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 0d4271e31fe685a8a82381d21d5166f0398080c1
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-04-19 10:17:39 +0300
+
+    validation: timer: check user pointer once
+    
+    Code clean up: check only once that user pointer is not NULL.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit d324b9de12c510ccf9fa1c1b6ece327c578ee53d
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-04-19 09:57:42 +0300
+
+    validation: timer: remove doxygen tags
+    
+    Doxygen documentation is not generated from validation test
+    files. Remove partial and unnecessary doxygen tags.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit e828b4d6f503ff94c40e30b1d8babf0dcbecde91
+Author: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+Date:   2018-04-18 17:50:47 +0300
+
+    configure.ac: update version to v1.19.0.0
+    
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+
+commit 1e0ac11c75eee10959d1fa674a05e746476271b3
+Author: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+Date:   2018-04-08 20:30:18 -0500
+
+    changelog: updates for odp v1.19.0.0
+    
+    Add updates for ODP v1.19.0.0 (Tiger Moth Final Release)
+    
+    Signed-off-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Bogdan Pricope &lt;bogdan.pricope@linaro.org&gt;
+    Reviewed-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 8caae505c35444706cff8815c41821d80e791403
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-04-11 17:29:19 +0300
+
+    validation: ipsec: validate outbound checksumming support
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 4b6787c84e020c350a03ec47d12e1ef68ddb6300
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-04-11 17:28:46 +0300
+
+    linux-gen: ipsec: implement outbound checksumming support
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 4142652b8eb397963bec48610bdb9ab6599e65fb
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-01-13 05:13:03 +0300
+
+    validation: ipsec: fix packet checksums
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 60777ba4309911df0780bd8de6d96524bc2ca03c
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-04-06 15:24:46 +0300
+
+    validation: verify IPv4 and UDP checksum validation and generation
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit b2632ac253a3b9f5ba7a4174acf6abe295ec3550
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-04-06 15:23:37 +0300
+
+    linux-gen: pktio: loop: support IPv4/TCP/UDP checksum generation
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 79f5c103310c36dc213a552b9534f68ce8df1132
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-04-09 15:45:55 +0300
+
+    linux-gen: packet: l4 checksum insertion support
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 2c99a9dc1978c9178e711d264aaaca2bc4702352
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-04-02 22:52:11 +0300
+
+    linux-gen: packet: IPv4 checksum insertion
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 88ba35773c76c871a222fe48a0dac05765c39936
+Author: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+Date:   2018-04-11 14:40:53 +0200
+
+    fdserver: handle signal interruption in connect()
+    
+    Signed-off-by: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+    Reviewed-by: Janne Peltonen &lt;janne.peltonen@nokia.com&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 2e96afe0b7c4e7e41fb03bcda605ab704f538ca1
+Author: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+Date:   2018-04-13 13:50:21 +0200
+
+    linux-gen: shm: check return value when registering fds
+    
+    fdserver functions such as that for registering a new fd may
+    fail. In this case we need to check the return value and do
+    a cleanup of any allocated blocks and fragments.
+    If it fails on deregistering, just return the error code.
+    
+    Signed-off-by: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 52ea8d51d522d7013f746748bf84bfc2e9bc042c
+Author: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+Date:   2018-04-11 10:35:22 +0200
+
+    linux-gen: fdserver: mask signals we don't need
+    
+    Make fdserver block all signals except those we are interested in, or
+    those that can't be masked, and set default handlers for those left,
+    thus preventing fdserver from executing any signal handlers that the
+    application may have installed prior to forking this process.
+    
+    Signed-off-by: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+    Reviewed-by: Janne Peltonen &lt;janne.peltonen@nokia.com&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit b7ee13d765e5d8da1ef68f0c0777cb5e40fffbf7
+Author: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+Date:   2018-04-02 13:57:40 +0300
+
+    shippable: reenable clang with disable abi compat options
+    
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+
+commit a2cad95118b79f204bc13914acf43a8fc1dd2682
+Author: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+Date:   2018-04-16 21:50:11 +0300
+
+    linux-gen: fix clang on aarch64 build
+    
+    No code change. Just move array definition several lines
+    up to make clang happy to generate valid code.
+    Fixes: https://bugs.linaro.org/show_bug.cgi?id=3611
+    
+    Suggested-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit a5340c53957b3174c89d03ecf2c61e9ba98ac57c
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2018-04-12 13:12:12 +0300
+
+    linux-gen: dpdk: allocate huge page memory for all numa nodes
+    
+    Allocate DPDK memory for all numa nodes in the system.
+    
+    Fixes bug: https://bugs.linaro.org/show_bug.cgi?id=3657
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 813cd2df67ae0591b0f792eff82854c5c9c642ca
+Author: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+Date:   2018-04-09 09:49:56 -0500
+
+    example: l2fwd: update readme regarding ordered queue usage
+    
+    Update the README file to clarify the effect of using ordered queues
+    with direct I/O or output interfaces supporting multiple queues.
+    
+    Signed-off-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Janne Peltonen &lt;janne.peltonen@nokia.com&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 48f8503baf847315dda6609abc01f5befe6e0284
+Author: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+Date:   2018-04-09 13:45:25 +0200
+
+    fdserver: change session ID after fork
+    
+    This is to avoid the fdserver process from handling signals sent to the
+    process group.
+    This patch partly fixes: https://bugs.linaro.org/show_bug.cgi?id=3690
+    
+    Signed-off-by: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+    Suggested-by: Janne Peltonen &lt;janne.peltonen@nokia.com&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit b1100fdba29d8f514236dbcfd6f17e7941c0256a
+Author: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+Date:   2018-04-12 14:07:30 +0200
+
+    linux-gen: shm: be consistent with rest of the code
+    
+    We should be consistent and use new_block as in the rest of the
+    function, instead of accessing the array of blocks using an index.
+    
+    Signed-off-by: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+    Signed-off-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit f96a21992e13cf401a3494f2caeec9d42f56f0d9
+Author: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+Date:   2018-04-12 13:49:00 +0200
+
+    linux-gen: shm: do not close provided file descriptors
+    
+    If we provide a file descriptor to _odp_ishm_reserve, this function
+    should not close them. It's the responsibility of the caller to decide
+    what to do with the file descriptor if the return value indicates an
+    error.
+    
+    Signed-off-by: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+    Signed-off-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 1e925d0ccc7340575ddcfa07ab7bd372d751e006
+Author: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+Date:   2018-04-12 13:53:48 +0200
+
+    linux-gen: shm: fill data used in do_map before the call
+    
+    do_map() checks the block's external_fd field to find out whether the
+    file descriptor provided was allocated externally or not, before closing
+    it in case an error occurred. However, this field was only updated
+    _after_ calling the do_map() function. Fix this.
+    
+    Signed-off-by: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+    Signed-off-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit c9d31f30ba4fd7818b4ba2ffd7bbaea74761a2d9
+Author: Juha-Matti Tilli &lt;juha-matti.tilli@iki.fi&gt;
+Date:   2018-04-09 19:59:46 +0300
+
+    linux-gen: netmap: ring configuration for VALE
+    
+    Configure ring for VALE. On my test laptop, this may increase odp_l2fwd
+    performance from 1.9 MPPS to 2.3 MPPS, so it gives over 20% more
+    performance.
+    
+    Signed-off-by: Juha-Matti Tilli &lt;juha-matti.tilli@iki.fi&gt;
+    Reviewed-and-tested-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit cabee48a54a68f333569ee1904bc04d53da7c9c6
+Author: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+Date:   2018-04-08 16:36:23 -0500
+
+    doc: userguide: add pktio capability and config info
+    
+    Update PktIO section of Users Guide to cover pktio capability
+    and input/output/parser configuration features.
+    
+    Signed-off-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 183ce9babe20e161caef6b55eccfd043b334f748
+Author: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+Date:   2018-04-08 16:35:21 -0500
+
+    doc: userguide: add packet checksum and parsing info
+    
+    Update packet documentation to include information on packet
+    parsing and checksum override handling.
+    
+    Signed-off-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 0fa9977e21010f963892f59a75f03e3ba800bc74
+Author: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+Date:   2018-04-05 17:04:13 -0500
+
+    doc: userguide: refresh pktio code examples
+    
+    Update pktio code examples to reflect latest API definitions.
+    
+    Signed-off-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit b0b07f403ffc22349ac8dd75f47238bea40891be
+Author: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+Date:   2018-04-04 16:20:47 -0500
+
+    doc: userguide: change sched type none to parallel
+    
+    Replace old ODP_SCHED_SYNC_NONE with current ODP_SCHED_SYNC_PARALLEL
+    when describing queue scheduling options.
+    
+    Signed-off-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit bd0377ae95427e80f04b0dd5f3a8dcb0b1ab89e3
+Author: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+Date:   2018-04-04 16:19:27 -0500
+
+    doc: userguide: shm corrections
+    
+    Clarify the use of the ODP_SHM_SINGLE_VM flag on shm operations.
+    
+    Signed-off-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 5555878edbda765134fbe50f3181f409963037ea
+Author: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+Date:   2018-04-04 16:18:11 -0500
+
+    doc: userguide: change pool queue to plain queue
+    
+    Queues fall into types PLAIN and SCHED. Correct terminology from
+    the old POLL queue type to the current PLAIN queue type.
+    
+    Signed-off-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Reviewed-by: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 009dab38672eaf8ab6eddc551da41a84e86915a5
+Author: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+Date:   2018-04-04 16:16:11 -0500
+
+    doc: userguide: typo corrections
+    
+    Signed-off-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 290decaf3259b036c3a402be428b04ba100f0f81
+Author: yhe &lt;yhe@sonicwall.com&gt;
+Date:   2018-03-28 08:51:20 +0800
+
+    validation:crypto:implement AES-XCBC-MAC and SHA384-HMAC
+    
+    Add AES-XCBC-MAC and SHA384-HMAC into the test case
+    
+    Signed-off-by: Tom He &lt;yhe@sonicwall.com&gt;
+    Reviewed-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+    Reviewed-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 61d16e162788ac0923c544b4d31bb847fa3d9189
+Author: yhe &lt;yhe@sonicwall.com&gt;
+Date:   2018-03-21 22:06:58 +0800
+
+    linux-gen:crypto:implement AES-XCBC-MAC and SHA384-HMAC
+    
+    implement the algorithm AES-XCBC-MAC and SHA384-HMAC
+    
+    Signed-off-by: Tom He &lt;yhe@sonicwall.com&gt;
+    Reviewed-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+    Reviewed-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 83fda5a447335b95bdd991187d4efb0a15a5709a
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-03-27 16:53:08 +0300
+
+    api: packet: UDP checksum value of zero
+    
+    UDP checksum value of zero results OK status when checksum
+    is checked.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 654507c6eeed83dd84210f7e481ded34f5d4cdca
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-03-27 14:25:12 +0300
+
+    test: sched_pktio: run in validation test suite
+    
+    Add script to run the test as part of validation test
+    suite. The script is based on odp_l2fwd_run.sh. Use only
+    single worker as that requires only one rx/tx queue from
+    pktio. Test passes if at least 1000 packets are received
+    in 5 seconds.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 84f8013995d4b96ac9471cc92285c76b50464415
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-03-27 12:55:57 +0300
+
+    test: sched_pktio: add option to collect statistics
+    
+    Options -s enables statistics collection and changes return
+    value to kilo-packets. Return value can be used in scripts to
+    validate correct test execution.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 92ebb26bae583ff864bc4bef6a2776329527a069
+Author: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+Date:   2018-04-06 16:40:17 +0300
+
+    travis: use -M option for generated patches
+    
+    generate patches with -M (move) option to not validate moved
+    files from stratch.
+    
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+
+commit ed4e1bfea15d8502e50b6c210f38dd3f13683d2f
+Author: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+Date:   2018-04-06 16:21:34 +0300
+
+    linux-gen: ishm: remove useless debug print
+    
+    in case of huge page it is ok that file was not created,
+    no need to generate confusing debug message here.
+    
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+
+commit ef5998dfd0ba1405fef6dd1a7f0e9adf686fca89
+Author: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+Date:   2018-04-06 16:17:01 +0300
+
+    linux-gen: hide debug prints from fd server
+    
+    Debug prints are very specific to fdserver internals and
+    useless until you debug fdserver code itself. Add option
+    to uncomment this prints if needed.
+    
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+
+commit a430caf661d4a0ad8d69c67dc7a20911e3169a25
+Author: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+Date:   2018-04-05 18:31:08 +0300
+
+    linux-gen: clean up ishm file naming
+    
+    rename ivshmem related files with  _&lt;name&gt; prefix to
+    odp_&lt;name&gt; for better fix project code style. No code
+    change, just file renames.
+    
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+
+commit fbe07de54f3768f32bd39a0ea9aa2a79188b1186
+Author: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+Date:   2018-04-03 09:44:51 +0200
+
+    fdserver: handle interruption by signal in accept
+    
+    This patch fixes: https://bugs.linaro.org/show_bug.cgi?id=3690
+    
+    Suggested-by: Janne Peltonen &lt;janne.peltonen@nokia.com&gt;
+    Signed-off-by: Josep Puigdemont &lt;josep.puigdemont@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 57df98eca15fe64a716f9f555714ef5fb9cd25e9
+Author: Bogdan Pricope &lt;bogdan.pricope@linaro.org&gt;
+Date:   2018-03-29 11:47:02 +0300
+
+    linux-gen: dpdk: fix runtime/default config read order
+    
+    Signed-off-by: Bogdan Pricope &lt;bogdan.pricope@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 674ea087fba016e55f03e3966fe64fc908141f8f
+Author: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+Date:   2018-03-30 19:09:07 +0300
+
+    add odp_ipsec to .gitignore
+    
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit a9584da4284c04e45a9584a58c6dbeb404871119
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-03-28 17:14:28 +0300
+
+    build: fix autoconf error caused by double-registering config item
+    
+    Autoconf uses provided tag as is, when registering config command.
+    Require platform code to pass platform argument, so that different
+    config commands will be registered.
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-and-tested-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 63123149319eb0e379dc52a3f4691993d026f3bf
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-03-23 04:36:41 +0300
+
+    build: don't use xxd to hexdump config file
+    
+    Use standard od and sed programs to hexdump config file, removing
+    dependency on xxd.
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 9a5a18af733c07109224e328ca0ac640ff49f845
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-03-24 05:42:25 +0300
+
+    build: another DPDK-linking fix
+    
+    Try our best to link with DPDK, if we are doing static linking of
+    examples and tests and we detected shared DPDK library. Build the list
+    of static libraries, in hope they are present on the system (like in
+    Debian/Ubuntu DPDK packages). Linking can still fail, as we have warned
+    during configure time.
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 06321dc028b83ea78b39eb9673859a40f9da37f7
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-03-24 04:54:37 +0300
+
+    build: move odp scheduler setting to common m4 file
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit d6de4dfcf1a3a6c861c87d47990f793c71328eda
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-03-23 18:56:59 +0300
+
+    linux-gen: ipsec: add proper support for AES-CCM
+    
+    Make linux-generic's IPsec actually support AES-CCM algorithm.
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit fc0a57306aa68a782e8611a9bd08ae10aaa5274a
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-03-23 18:55:54 +0300
+
+    linux-gen: crypto: add IV length checks
+    
+    Check IV length on crypto session creation, fixing possible issues
+    later, during en/decryption.
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 2eaf47b69ea5f2095e26e0ea597d3e8702b0da06
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-03-23 18:42:42 +0300
+
+    performance: crypto: add more algorithms
+    
+    Run more performance tests on crypto transformation.
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 9f3311f92d28ef9fdf6ef3d8ec8b90efe7a832d6
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-03-23 18:42:42 +0300
+
+    performance: ipsec: add more algorithms
+    
+    Run more performance tests on IPsec transformation.
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 68b1a52611e6ac9be306e5a17d009a6fd46c455e
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-03-23 18:19:48 +0300
+
+    performance: ipsec: add AH measurements
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 59d636481fd1771107f3eb4632c2a9fc868afc11
+Author: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+Date:   2018-03-15 15:50:22 +0300
+
+    tests: add IPsec performance test
+    
+    Use this tool to measure IPsec performance with different algorithms
+    For now only outbound direction is supported.
+    
+    Signed-off-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 0225a8a396ddc7168be096f28b0a711184a48ef9
+Author: Bogdan Pricope &lt;bogdan.pricope@linaro.org&gt;
+Date:   2018-03-22 08:51:27 +0200
+
+    linux-gen: pktio: dpdk: fix IPv4 csum calculation when l4 offset is not set
+    
+    IPv4 header contains length of the header and options in IHL field. It
+    can be used to replace L3 length calculation based on offsets.
+    This patch fixes bug: https://bugs.linaro.org/show_bug.cgi?id=3686.
+    
+    Signed-off-by: Bogdan Pricope &lt;bogdan.pricope@linaro.org&gt;
+    Reviewed-and-tested-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 72febbae5ea55a5fd051978fbfa0f669cf0e99fc
+Author: Bogdan Pricope &lt;bogdan.pricope@linaro.org&gt;
+Date:   2018-03-22 16:57:49 +0200
+
+    linux-gen: pktio: dpdk: accept UDPv4 packets with all-zero csum
+    
+    Accept IPv4 UDP packets with all-zero checksum field even if
+    DPDK reported it as bad checksum value.
+    This patch fixes bug: https://bugs.linaro.org/show_bug.cgi?id=3685.
+    
+    Signed-off-by: Bogdan Pricope &lt;bogdan.pricope@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit f80f28c4046b650c180bcb9b41c859c0c8e2564e
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-03-15 16:43:55 +0200
+
+    test: sched_pktio: new scheduler performance test with pktio
+    
+    Added new test which can be used to test scheduler performance
+    with packet IO. Future development includes multiple application
+    pipeline stages through queues.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit b08aa94548163ae4d4bac2724e68ca9102667f6a
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-03-16 11:37:20 +0200
+
+    linux-gen: pktio: add index to pktio print
+    
+    Print also pktio index. It is often more useful information to
+    the user than handle (which may be e.g. a pointer).
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 4aacfd4d72b80a22d449d865a6c4f063afa823ab
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-03-15 16:47:09 +0200
+
+    linux-gen: pktio: add error prints
+    
+    Added error prints for failures due to a bad handle.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Bill Fischofer &lt;bill.fischofer@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 71ca38c00c11ebb6b4dede6d09ebdd28eb45d890
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2018-03-13 08:44:50 +0200
+
+    linux-gen: dpdk: bump supported dpdk version to v17.11
+    
+    Bump supported DPDK version to LTS version 17.11. Also adds dependecies for
+    optional Mellanox PMD drivers.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Bogdan Pricope &lt;bogdan.pricope@linaro.org&gt;
+    Reviewed-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 7e0c523ad6f209f238277e4116c21ba696edb7f4
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-03-12 17:05:32 +0200
+
+    linux-gen: sched: increase max spread
+    
+    Allow user to configure larger than the default spread value.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Balasubramanian Manoharan &lt;bala.manoharan@linaro.org&gt;
+    Reviewed-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit 12d238d96318cc9d46dd5a2893894824a633805b
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-03-12 16:54:41 +0200
+
+    linux-gen: sched: decouple spread and group table sizes
+    
+    Only thing common between these tables were the shared
+    round counter. With separate counters, tables can have
+    different sizes. Especially, spread table size needs
+    to be increased and support also sizes not power of two
+    (configurable spread values).
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Balasubramanian Manoharan &lt;bala.manoharan@linaro.org&gt;
+    Reviewed-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+commit bcd246e3a9948a631eb8eb77886ac1b369b13dba
+Author: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+Date:   2018-03-09 16:49:48 +0200
+
+    linux-gen: sched: configurable priority spread
+    
+    Use configuration file to enable user to change priority queue
+    spreading.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@linaro.org&gt;
+    Reviewed-by: Balasubramanian Manoharan &lt;bala.manoharan@linaro.org&gt;
+    Reviewed-by: Dmitry Eremin-Solenikov &lt;dmitry.ereminsolenikov@linaro.org&gt;
+    Signed-off-by: Maxim Uvarov &lt;maxim.uvarov@linaro.org&gt;
+
+...</pre></div>
+
+</body>
+</html>
